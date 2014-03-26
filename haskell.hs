@@ -8,6 +8,7 @@ fib a b = [a,b] ++ fib' b (a + b) where
 p2 = sum $ filter even $ takeWhile (<=4000000) $ fib 1 2
 
 -- Problem 3
+-- Please forgive me for the code that follows
 primes = [2] ++ filter (\x -> not $ or $ map (\y -> rem x y == 0) [2..x - 1]) [3,5..]
 
 p3 x = let plist = takeWhile (<=(div x 2)) primes
