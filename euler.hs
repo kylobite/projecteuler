@@ -1,5 +1,5 @@
 -- Problem 1
-p1 = sum $ filter (\x -> rem 3 == 0 || rem x 5 == 0) [1..999]
+p1 = sum $ filter (\x -> rem x 3 == 0 || rem x 5 == 0) [1..999]
 
 -- Problem 2
 fib a b = [a,b] ++ fib' b (a + b) where
