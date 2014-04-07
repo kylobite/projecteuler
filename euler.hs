@@ -32,10 +32,10 @@ p5 n = foldl1 lcm [2..n]
 p6 n = (sum [1..n] * sum [1..n]) - sum [x * x | x <- [1..n]]
 
 -- Problem 7
-primes = [2] ++ filter test [3,5..] where
+primes' = [2] ++ filter test [3,5..] where
     test x = not $ or $ map (\y -> rem x y == 0) [2..x - 1]
 
-p7 n = last $ take n primes
+p7 n = last $ take n primes'
 
 -- Problem 8
 p8 = let g = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858" ++
@@ -67,3 +67,20 @@ p9 = product $
                                b' = sqrt $ (fromIntegral b :: Double)
                                c' = sqrt $ (fromIntegral c :: Double)
                            in [a',b',c']
+
+-- Problem 10
+primes = [2] ++ filter isPrime [3,5..]
+
+isPrime a = isPrime' a primes
+
+isPrime' a (p:ps)
+    | p*p > a      = True
+    | mod a p == 0 = False
+    | otherwise    = isPrime' a ps   
+
+p10 = sum $ takeWhile (<=2000000) primes
+
+
+
+
+
