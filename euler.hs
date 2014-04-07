@@ -67,7 +67,3 @@ p9 = product $
                                b' = sqrt $ (fromIntegral b :: Double)
                                c' = sqrt $ (fromIntegral c :: Double)
                            in [a',b',c']
-
-
-
-
