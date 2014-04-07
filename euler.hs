@@ -69,14 +69,12 @@ p9 = product $
                            in [a',b',c']
 
 -- Problem 10
-primes = [2] ++ filter isPrime [3,5..]
-
-isPrime a = isPrime' a primes
-
-isPrime' a (p:ps)
-    | p*p > a      = True
-    | mod a p == 0 = False
-    | otherwise    = isPrime' a ps   
+primes = [2] ++ filter isPrime [3,5..] where
+    isPrime a = isPrime' a primes
+    isPrime' a (p:ps)
+        | p*p > a      = True
+        | mod a p == 0 = False
+        | otherwise    = isPrime' a ps   
 
 p10 = sum $ takeWhile (<=2000000) primes
 
