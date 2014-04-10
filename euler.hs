@@ -103,7 +103,6 @@ q = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08\n"
 split = map words $ lines q
 
 horizontal = (map . map) (\x -> read x :: Int) split
--- [[0,1,2],[3,4,5],[6,7,8],[9,10,11]]
 
 vertical = shift 0 horizontal [] where
     shift i xs c = if i == (length xs - 1)
@@ -135,6 +134,15 @@ p11 = maximum $ [(maximum $ map sort4max' horizontal),
                  (maximum $ map sort4max' diagonal),
                  (maximum $ map sort4max' diagonalr)]
 
+-- Problem 12
+factors n = let s = sum $ take n [1..]
+            in factors'  s [1..s] [] where
+                factors' s []     c = c
+                factors' s (x:xs) c = if s `rem` x == 0
+                                    then factors' s [(x+1)..((s `div` x)-1)] [x,s `div` x] ++ c
+                                    else factors' s xs c
+
+p12 n = maximum $ concat $ take 1 $ filter (\x -> length x > n) $ map factors [1..]
 
 
 
