@@ -1,4 +1,6 @@
 import Data.Char (digitToInt)
+import Data.List (elemIndex)
+import Data.Bits (shiftR)
 
 -- Problem 1
 p1 = sum $ filter (\x -> rem x 3 == 0 || rem x 5 == 0) [1..999]
@@ -145,7 +147,6 @@ factors n = let s = sum $ take n [1..]
 p12 n = maximum $ concat $ take 1 $ filter (\x -> length x > n) $ map factors [1..]
 
 -- Problem 13
-i :: [Integer]
 i = [37107287533902102798797998220837590246510135740250,
      46376937677490009712648124896970078050417018260538,
      74324986199524741059474233309513058123726617309629,
@@ -246,7 +247,23 @@ i = [37107287533902102798797998220837590246510135740250,
      72107838435069186155435662884062257473692284509516,
      20849603980134001723930671666823555245252804609722,
      53503534226472524250874054075591789781264330331690]
+
 p13 = take 10 $ show $ sum i
+
+-- Problem 14
+next :: Int -> Int
+next n = next' n 1 where
+    next' _ i | seq i False = undefined
+    next' 1 i = i
+    next' n i | even n = next' (n `shiftR` 1) $ succ i
+              | odd  n = next' (3 * n + 1)    $ succ i
+
+ns  = map next [1..1000000]
+
+extract (Just a) = a
+extract Nothing  = 0
+
+p14 = (extract $ (maximum ns) `elemIndex` ns) + 1
 
 
 
