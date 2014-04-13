@@ -260,10 +260,7 @@ next n = next' n 1 where
 
 ns  = map next [1..1000000]
 
-extract (Just a) = a
-extract Nothing  = 0
-
-p14 = (extract $ (maximum ns) `elemIndex` ns) + 1
+p14 = fmap succ $ (maximum ns) `elemIndex` ns
 
 
 
